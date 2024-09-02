@@ -1,0 +1,29 @@
+<h2>Task List</h2>
+<mat-form-field appearance="fill">
+  <mat-label>Filter tasks</mat-label>
+  <mat-select [(ngModel)]="filter">
+    <mat-option value="">All</mat-option>
+    <mat-option value="pending">Pending</mat-option>
+    <mat-option value="completed">Completed</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-table [dataSource]="tasks">
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+    <mat-cell *matCellDef="let task"> {{ task.title }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+    <mat-cell *matCellDef="let task">
+      <button mat-button (click)="editTask(task.id)">Edit</button>
+      <button mat-button color="warn" (click)="deleteTask(task.id)">Delete</button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<button mat-raised-button color="primary" (click)="createTask()">Add Task</button>

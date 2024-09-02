@@ -1,0 +1,25 @@
+<h2>{{ isEdit ? 'Edit Task' : 'Create Task' }}</h2>
+<form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput name="title" [(ngModel)]="task.title" required>
+    <mat-error *ngIf="taskForm.submitted && !task.title">
+      Title is required.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput name="description" [(ngModel)]="task.description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Status</mat-label>
+    <mat-select [(ngModel)]="task.status">
+      <mat-option value="pending">Pending</mat-option>
+      <mat-option value="completed">Completed</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">{{ isEdit ? 'Update' : 'Create' }}</button>
+</form>
